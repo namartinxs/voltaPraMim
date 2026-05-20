@@ -34,6 +34,6 @@ export class CriarItemDTO {
 
     //  formato de data (ex: "2026-05-20")
     @IsDateString({}, { message: 'A data deve estar em um formato ISO válido (AAAA-MM-DD)' })
-    data_encontrado!: string;
+    data_recebido!: string;
 }
 
