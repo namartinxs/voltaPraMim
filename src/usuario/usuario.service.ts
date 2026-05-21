@@ -1,34 +1,34 @@
 import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
+import { UsuarioRepository } from "./usuario.repository"; // Importa o SEU repositório
 import { UsuarioEntity } from "./usuario.entity";
-import { Repository } from "typeorm";
 import { ListarUsuarioDTO } from "./dto/ListarUsuario.dto";
 import { AtualizarUsuarioDTO } from "./dto/AtualizarUsuario.dto";
 
 @Injectable()
 export class UsuarioService {
     constructor(
-        @InjectRepository(UsuarioEntity)
-        private readonly usuarioRepository: Repository<UsuarioEntity>
+        // Removido o @InjectRepository(UsuarioEntity)
+        // Agora injetamos a sua classe de repositório customizada!
+        private readonly usuarioRepository: UsuarioRepository
     ) { }
 
     async listarUsuarios() {
-        const usuariosSalvos = await this.usuarioRepository.find()
-        const usuariosLista = usuariosSalvos.map(usuario => new ListarUsuarioDTO(usuario.id, usuario.nome, usuario.tipo))
-
-        return usuariosLista
+        const usuariosSalvos = await this.usuarioRepository.listar();
+        return usuariosSalvos.map(
+            usuario => new ListarUsuarioDTO(usuario.id, usuario.nome, usuario.tipo)
+        );
     }
 
     async criarUsuario(usuarioEntity: UsuarioEntity) {
-        await this.usuarioRepository.save(usuarioEntity)
+        return await this.usuarioRepository.salvar(usuarioEntity);
     }
 
-    async atualizarUsuario(id: string, usuarioEntity: AtualizarUsuarioDTO) {
-        await this.usuarioRepository.update(id, usuarioEntity)
-
+    async atualizarUsuario(id: string, dadosAtualizacao: AtualizarUsuarioDTO) {
+        // Chamando o método atualiza mapeado no seu repositório
+        return await this.usuarioRepository.atualiza(id, dadosAtualizacao);
     }
 
     async deletarUsuario(id: string) {
-        await this.usuarioRepository.delete(id)
+        return await this.usuarioRepository.remove(id);
     }
 }
