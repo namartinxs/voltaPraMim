@@ -1,14 +1,14 @@
 import { IsDateString, IsEnum, IsNotEmpty, IsOptional } from "class-validator";
 import { localizacaoItem, statusItem } from "./criarItemPerdido.dto";
 
-export class CriarItemDTO {
+export class AtualizarItemDTO {
     @IsOptional()
     @IsEnum(localizacaoItem, { message: 'A localização informada é inválida' })
     localizado_em!: localizacaoItem;
 
     @IsOptional()
     @IsEnum(statusItem, { message: 'O status informado é inválido' })
-    status!: statusItem;
+    statusItem!: statusItem;
 
     @IsOptional()
     @IsNotEmpty({ message: 'O nome não pode ser vazio' })

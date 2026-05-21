@@ -24,7 +24,7 @@ export class CriarItemDTO {
     localizado_em!: localizacaoItem;
 
     @IsEnum(statusItem, { message: 'O status informado é inválido' })
-    status!: statusItem;
+    statusItem!: statusItem;
 
     @IsNotEmpty({ message: 'O nome não pode ser vazio' })
     nome!: string;
