@@ -4,10 +4,12 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.config.service';
 import { ConfigModule } from '@nestjs/config';
+import { ItensPerdidosModule } from './ItensPerdidos/itensPerdidos.module';
 
 @Module({
   imports: [
     UsuarioModule,
+    ItensPerdidosModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       useClass: PostgresConfigService,
