@@ -1,7 +1,18 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsString, MinLength } from "class-validator";
 import { EmailUnico } from "../validacao/email-unico-validator";
-import { StatusUsuario, TipoUsuario } from "./AtualizarUsuario.dto";
 
+
+export enum StatusUsuario {
+    ativo = "ativo",
+    inativo = "inativo",
+}
+
+export enum TipoUsuario {
+    funcionario = "funcionario",
+    estudante_odonto = "estudante_odonto",
+    estudante_ads = "estudante_ads",
+    estudante_farmacia = "estudante_farmacia",
+}
 
 export class CriarUsuarioDTO {
     @IsNotEmpty({ message: 'O nome não pode ser vazio' })
