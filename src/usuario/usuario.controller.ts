@@ -28,7 +28,7 @@ export class UsuarioController {
         usuarioEntity.senha = dadosUsuario.senha;
         usuarioEntity.id = uuid()
 
-        this.usuarioService.criarUsuario(usuarioEntity);
+        await this.usuarioService.criarUsuario(usuarioEntity);
 
         return { usuario: new ListarUsuarioDTO(usuarioEntity.id, usuarioEntity.nome, usuarioEntity.tipo), status: 'usuario criado com sucesso!' };
     }
