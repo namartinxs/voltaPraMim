@@ -36,7 +36,7 @@ export class CriarItemDTO {
     @IsDateString({}, { message: 'A data deve estar em um formato ISO válido (AAAA-MM-DD)' })
     data_recebido!: string;
 
-    @IsNotEmpty({ message: 'Imagem não pode ser vazio' })
-    imagem!: string;
+    // @IsNotEmpty({ message: 'Imagem não pode ser vazio' })
+    // imagem!: string;
 }
 
