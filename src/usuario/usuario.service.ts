@@ -3,6 +3,7 @@ import { UsuarioRepository } from "./usuario.repository"; // Importa o SEU repos
 import { UsuarioEntity } from "./usuario.entity";
 import { ListarUsuarioDTO } from "./dto/ListarUsuario.dto";
 import { AtualizarUsuarioDTO } from "./dto/AtualizarUsuario.dto";
+import * as bycript from "bcrypt"
 
 @Injectable()
 export class UsuarioService {
@@ -20,6 +21,8 @@ export class UsuarioService {
     }
 
     async criarUsuario(usuarioEntity: UsuarioEntity) {
+        const senhaHash = await bycript.hash(usuarioEntity.senha, 10)
+        usuarioEntity.senha = senhaHash
         return await this.usuarioRepository.salvar(usuarioEntity);
     }
 
