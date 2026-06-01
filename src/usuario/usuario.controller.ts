@@ -14,7 +14,6 @@ import { UsuarioService } from "./usuario.service";
 export class UsuarioController {
     // private usuarioRepository = new UsuarioRepository()
     constructor(
-        private usuarioRepository: UsuarioRepository,
         private usuarioService: UsuarioService
     ) { }
 
