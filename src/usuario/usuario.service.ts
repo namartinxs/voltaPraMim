@@ -31,6 +31,10 @@ export class UsuarioService {
         return await this.usuarioRepository.atualiza(id, dadosAtualizacao);
     }
 
+    async listarItensPorId(id: string) {
+        return await this.usuarioRepository.buscarPorId(id);
+    }
+
     async deletarUsuario(id: string) {
         return await this.usuarioRepository.remove(id);
     }
