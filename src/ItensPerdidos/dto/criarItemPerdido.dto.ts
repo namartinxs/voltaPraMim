@@ -14,9 +14,9 @@ export enum localizacaoItem {
 }
 
 export enum statusItem {
-    encontrado = 'encontrado',
     devolvido = 'devolvido',
     descartado = 'descartado',
+    aguardando = 'aguardando',
 }
 
 export class CriarItemDTO {
@@ -24,7 +24,7 @@ export class CriarItemDTO {
     localizado_em!: localizacaoItem;
 
     @IsEnum(statusItem, { message: 'O status informado é inválido' })
-    statusItem!: statusItem;
+    statusItem?: statusItem;
 
     @IsNotEmpty({ message: 'O nome não pode ser vazio' })
     nome!: string;
@@ -36,7 +36,7 @@ export class CriarItemDTO {
     @IsDateString({}, { message: 'A data deve estar em um formato ISO válido (AAAA-MM-DD)' })
     data_recebido!: string;
 
-    // @IsNotEmpty({ message: 'Imagem não pode ser vazio' })
+
     // imagem!: string;
 }
 
