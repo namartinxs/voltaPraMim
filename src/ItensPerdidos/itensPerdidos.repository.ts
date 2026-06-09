@@ -11,6 +11,7 @@ export class ItensPerdidosRepository {
         private readonly ormRepository: Repository<ItensPerdidoEntity>
 
     ) { }
+    
 
     async buscarPorId(id: string): Promise<ItensPerdidoEntity> {
         const item = await this.ormRepository.findOneBy({ id })
@@ -38,7 +39,7 @@ export class ItensPerdidosRepository {
         const itensBuscados = await this.ormRepository.findBy({ statusItem });
 
         if (itensBuscados.length === 0) {
-            throw new NotFoundException(`Nenhum item contendo "${status}" foi encontrado`);
+            throw new NotFoundException(`Nenhum item contendo "${statusItem}" foi encontrado`);
         }
 
         return itensBuscados;
