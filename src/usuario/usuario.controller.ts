@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, UseGuards } from "@nestjs/common";
 
 import { CriarUsuarioDTO } from "./dto/CriarUsuario.dto";
 
@@ -8,6 +8,7 @@ import { AtualizarUsuarioDTO } from "./dto/AtualizarUsuario.dto";
 import { UsuarioEntity } from "./usuario.entity";
 import { UsuarioRepository } from "./usuario.repository";
 import { UsuarioService } from "./usuario.service";
+import { AuthGuard } from "@nestjs/passport";
 
 // METODOS
 @Controller('/usuarios')
@@ -17,6 +18,8 @@ export class UsuarioController {
         private usuarioService: UsuarioService
     ) { }
 
+    // priva o acesso a quem esta logado
+    // @UseGuards(AuthGuard("jwt"))
     @Post()
     async criarUsuario(@Body() dadosUsuario: CriarUsuarioDTO) {
         const usuarioEntity = new UsuarioEntity();
@@ -38,6 +41,13 @@ export class UsuarioController {
         return usuariosSalvos
     }
 
+
+    @Get('/:id')
+    async buscarPorId(@Param('id', ParseUUIDPipe) id: string) {
+        return await this.usuarioService.listarItensPorId(id);
+    }
+
+
     @Put('/:id')
     async atualizarUsuario(@Param('id') id: string, @Body() novosDados: AtualizarUsuarioDTO) {
         const usuarioAtualizado = await this.usuarioService.atualizarUsuario(id, novosDados)
@@ -47,6 +57,7 @@ export class UsuarioController {
         }
     }
 
+    
     @Delete('/:id')
     async deletarUsuario(@Param('id') id: string) {
         const usuarioRemovido = await this.usuarioService.deletarUsuario(id);
