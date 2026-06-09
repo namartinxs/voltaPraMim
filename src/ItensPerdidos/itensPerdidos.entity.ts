@@ -6,9 +6,9 @@ import { localizacaoItem, statusItem } from "./dto/criarItemPerdido.dto";
 export class ItensPerdidoEntity {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
-    @Column({ name: 'status_item', length: 40, nullable: false })
+    @Column({ name: 'status_item', length: 40, nullable: false, default: 'aguardando'})
     statusItem!: statusItem;
-    @Column({ name: ' localizado_em!', length: 40, nullable: false })
+    @Column({ name: 'localizado_em!', length: 40, nullable: false })
     localizado_em!: localizacaoItem;
     @Column({ name: 'nome', length: 100, nullable: false })
     nome!: string;
@@ -20,6 +20,9 @@ export class ItensPerdidoEntity {
     updatedAt!: string;
     @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt!: string
-    // @Column({ name: 'imagem', length: 100, nullable: false })
-    // imagem!: ImagemItem[]
+    @Column({
+        name: 'imagem',
+        nullable: true
+    })
+    imagem?: string;
 }
