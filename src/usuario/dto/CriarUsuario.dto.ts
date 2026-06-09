@@ -9,10 +9,9 @@ export enum StatusUsuario {
 
 export enum TipoUsuario {
     funcionario = "funcionario",
-    estudante_odonto = "estudante_odonto",
-    estudante_ads = "estudante_ads",
-    estudante_farmacia = "estudante_farmacia",
+    estudante = "estudante"
 }
+
 
 export class CriarUsuarioDTO {
     @IsNotEmpty({ message: 'O nome não pode ser vazio' })
@@ -24,6 +23,6 @@ export class CriarUsuarioDTO {
     status!: StatusUsuario;
     @IsEnum(TipoUsuario, { message: 'Valor informado invalido' })
     tipo!: TipoUsuario;
-    @MinLength(6,{message:'A senha precisater no minímo seis caracteres'})
+    @MinLength(6, { message: 'A senha precisater no minímo seis caracteres' })
     senha!: string;
 }
